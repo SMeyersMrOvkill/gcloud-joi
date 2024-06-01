@@ -1,5 +1,6 @@
 import argparse
 import sys
+import os
 from flask import jsonify, Flask, request
 from queue import Queue
 
@@ -13,7 +14,7 @@ def _route_store():
 def main(args):
   app = Flask(__name__)
   app.add_url_route("/store", "store", view_func=_route_store)
-  app.launch(host="0.0.0.0", port=args.port)
+  app.launch(host="0.0.0.0", port=(os.getenv("PORT") or 1140))
 
 if __name__ == "__main__":
   argp = argparse.ArgumentParser("Json Object Interactions")
